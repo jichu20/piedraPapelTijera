@@ -1,0 +1,46 @@
+name: Builder golang containerto and create docker tag (latest)
+on:
+  push:
+    branches:
+      - develop
+  
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: checkout repo
+        uses: actions/checkout@main
+      - 
+        name: Get version and date builder
+        run: |
+          echo GITHUB_VERSION=latest >> $GITHUB_ENV
+          echo GITHUB_BUILDER=$(make builder) >> $GITHUB_ENV
+      - 
+        name: show version
+        run: echo $GITHUB_VERSION
+      - 
+        name: show builder
+        run: echo $GITHUB_BUILDER
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          build-args: |
+            VERSION=${{env.GITHUB_VERSION}}
+            BUILDER=${{env.GITHUB_BUILDER}}
+          push: true
+          tags: jichu20/rps:${{env.GITHUB_VERSION}}
