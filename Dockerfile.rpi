@@ -1,16 +1,9 @@
 # Usamos una imagen base de Go ligera
-# FROM golang:latest as builder
-FROM --platform=linux/amd64 golang:alpine AS builder
-
-LABEL stage=gobuilder
-
-ENV CGO_ENABLED 0
-ENV GOOS linux
-ENV GOARCH amd64
+# FROM arm32v7/golang as builder
+FROM arm32v7/golang:latest as builder
 
 ARG VERSION="development"
 ARG BUILD="1999-01-01T00:00:00Z"
-
 # Establecemos el directorio de trabajo
 WORKDIR /app
 
@@ -28,7 +21,7 @@ COPY . .
 RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./rps ./main.go
 
 # Usamos alpine para mantener nuestro contenedor lo más ligero posible
-FROM scratch
+FROM arm32v7/golang:latest
 
 WORKDIR /app/
 
