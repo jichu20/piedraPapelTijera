@@ -25,7 +25,7 @@ RUN go mod download
 COPY . .
 
 # Compilamos el binario
-RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./bin ./main.go
+RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./rps ./main.go
 
 # ENTRYPOINT ["./main"]
 # CMD ["sleep","3600000"]
@@ -36,7 +36,7 @@ FROM scratch
 WORKDIR /app/
 
 # Copiamos el binario compilado desde el primer paso
-COPY --from=builder /app/bin .
+COPY --from=builder /app/rps .
 COPY static/ /app/static/
 COPY templates/ /app/templates/
 
