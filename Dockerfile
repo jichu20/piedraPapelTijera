@@ -41,4 +41,4 @@ COPY templates/ /app/templates/
 EXPOSE 8080
 
 # Ejecutamos el microservicio
-CMD ["./rps"]
+ENTRYPOINT ["/bin/bash"]
