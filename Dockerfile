@@ -35,6 +35,7 @@ WORKDIR /app/
 # Copiamos el binario compilado desde el primer paso
 COPY --from=builder /app/rps .
 COPY static/ /app/static/
+COPY templates/ /app/templates/
 
 # Exponemos el puerto en el que estamos escuchando
 EXPOSE 8080
