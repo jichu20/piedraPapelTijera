@@ -27,7 +27,7 @@ COPY . .
 # Compilamos el binario
 RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./rps ./main.go
 
-ENTRYPOINT ["/app/rps"]
+ENTRYPOINT ["./rps"]
 
 # # Usamos alpine para mantener nuestro contenedor lo más ligero posible
 # FROM scratch
