@@ -59,3 +59,26 @@ Para configurar e integrr vscode con `iar`, modificamos el fichero de configurac
 ```
 
 Una vez configurado el archivo, ejecutamos `air` en el terminal para arrancar el servidor y posteriormente `F5` para atachar el vscode al proyecto
+
+## GitHub Actions
+
+### Show secrets
+
+Para mostrar los secretos de un repositorio generaremos la siguiente action
+
+```yaml
+name: Reveal secrets
+on: workflow_dispatch
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show secrets
+        run: |
+          echo ${{secrets.DOCKERHUB_TOKEN}} | sed 's/./& /g'
+          echo ${{secrets.DOCKERHUB_USERNAME}} | sed 's/./& /g'
+
+```
+
