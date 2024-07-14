@@ -25,18 +25,20 @@ RUN go mod download
 COPY . .
 
 # Compilamos el binario
-RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o rps main.go
+RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o /tmp/rps ./main.go
 
-ENTRYPOINT ["/rps"]
+ENTRYPOINT ["./app"]
 
-# # Usamos alpine para mantener nuestro contenedor lo más ligero posible
-# FROM scratch
+# Usamos alpine para mantener nuestro contenedor lo más ligero posible
+FROM scratch
 
-# # Copiamos el binario compilado desde el primer paso
-# COPY --from=builder /app/rps /rps
+WORKDIR /app
 
-# # Exponemos el puerto
-# EXPOSE 8080
+# Copiamos el binario compilado desde el primer paso
+COPY --from=builder /tmp/rps ./rps
 
-# # Ejecutamos el microservicio
-# ENTRYPOINT ["/rps"]
+# Exponemos el puerto
+EXPOSE 8080
+
+# Ejecutamos el microservicio
+ENTRYPOINT ["/app/rps"]
