@@ -27,20 +27,20 @@ COPY . .
 # Compilamos el binario
 RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./rps ./main.go
 
-ENTRYPOINT ["./rps"]
+# ENTRYPOINT ["./rps"]
 
-# # Usamos alpine para mantener nuestro contenedor lo más ligero posible
-# FROM scratch
+# Usamos alpine para mantener nuestro contenedor lo más ligero posible
+FROM scratch
 
-# WORKDIR /app/
+WORKDIR /app/
 
-# # Copiamos el binario compilado desde el primer paso
-# COPY --from=builder /app/rps .
-# COPY static/ /app/static/
-# COPY templates/ /app/templates/
+# Copiamos el binario compilado desde el primer paso
+COPY --from=builder /app/rps .
+COPY static/ /app/static/
+COPY templates/ /app/templates/
 
-# # Exponemos el puerto en el que estamos escuchando
-# EXPOSE 8080
+# Exponemos el puerto en el que estamos escuchando
+EXPOSE 8080
 
-# # Ejecutamos el microservicio
-# ENTRYPOINT ["/bin/bash"]
+# Ejecutamos el microservicio
+ENTRYPOINT ["/app/rps/main"]
