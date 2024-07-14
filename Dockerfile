@@ -27,7 +27,8 @@ COPY . .
 # Compilamos el binario
 RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./rps ./main.go
 
-# ENTRYPOINT ["./rps"]
+# ENTRYPOINT ["./main"]
+# CMD ["sleep","3600000"]
 
 # Usamos alpine para mantener nuestro contenedor lo más ligero posible
 FROM scratch
@@ -43,4 +44,4 @@ COPY templates/ /app/templates/
 EXPOSE 8080
 
 # Ejecutamos el microservicio
-ENTRYPOINT ["/app/rps/main"]
+ENTRYPOINT ["/app/main"]
