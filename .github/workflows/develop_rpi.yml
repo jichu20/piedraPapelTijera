@@ -1,4 +1,4 @@
-name: Builder golang containerto ARM and create docker tag (latest)
+name: DEVELOP - docker ARM
 on:
   push:
     branches:

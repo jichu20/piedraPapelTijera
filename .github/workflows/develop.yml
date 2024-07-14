@@ -1,4 +1,4 @@
-name: Builder golang containerto and create docker tag (latest)
+name: DEVELOP - docker AMD/linux
 on:
   push:
     branches:
