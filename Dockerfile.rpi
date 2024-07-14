@@ -18,7 +18,7 @@ RUN go mod download
 COPY . .
 
 # Compilamos el binario
-RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./bin ./main.go
+RUN go build -ldflags="-X 'main.Version=${VERSION}' -X main.Build=${BUILD}" -o ./rps ./main.go
 
 # Usamos alpine para mantener nuestro contenedor lo más ligero posible
 FROM arm32v7/golang:latest
@@ -26,7 +26,7 @@ FROM arm32v7/golang:latest
 WORKDIR /app/
 
 # Copiamos el binario compilado desde el primer paso
-COPY --from=builder /app/bin .
+COPY --from=builder /app/rps .
 COPY static/ /app/static/
 COPY templates/ /app/templates/
 
