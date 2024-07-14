@@ -1,0 +1,40 @@
+{{ template "base" . }}
+{{ define "title" }}RPS web - Inicio{{ end }}
+{{ define "content" }}
+    
+<section class="container py-5">
+    <h1 class="display-4 fw-bold py-3 text-center">Bienvenido a Piedra, Papel o Tijera</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="static/img/rock_icon.png" alt="rock_icon" class="img-fluid">
+        </div>
+        <div class="col-md-4">
+            <img src="static/img/paper_icon.png" alt="rock_icon" class="img-fluid">
+        </div>
+        <div class="col-md-4">
+            <img src="static/img/scissors_icon.png" alt="rock_icon" class="img-fluid">
+        </div>
+    </div>
+    <p class="lead text-center fs-2 py-4">Juega contra la máquina y diviértete</p>
+    <p class="text-center">
+        <a href="/new" class="btn btn-success btn-lg">Nuevo juego</a>
+    </p>
+</section>
+<section class="container py-5">
+<h2 class="mb-4">¿Cómo se juega?</h2>
+<ol>
+    <ol class="list-group list-group-numbered">
+        <li class="list-group-item">Crear un juego nuevo.</li>
+        <li class="list-group-item">Ingrese su nombre.</li>
+        <li class="list-group-item">Empiece a Jugar.</li>
+        <li class="list-group-item">El juego consiste en que el jugador elige una de las tres opciones: piedra, papel o tijera.</li>
+        <li class="list-group-item">La máquina elige una de las tres opciones de forma aleatoria.</li>
+        <li class="list-group-item">Se comparan las elecciones y se determina el ganador.</li>
+        <li class="list-group-item">Si el jugador gana, se le suma un punto. Si la máquina gana, se le suma un punto a ella. Si hay empate, no se suma ningún punto.</li>
+        <li class="list-group-item">El juego termina cuando uno de los dos llega a 3 puntos.</li>
+    </ol>
+</ol>
+
+
+</section>
+{{ end }}
